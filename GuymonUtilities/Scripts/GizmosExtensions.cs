@@ -6,38 +6,26 @@ namespace Guymon.Utilities {
         /// <summary>
         /// Draws a wire arc.
         /// </summary>
-        /// <param name="position"></param>
-        /// <param name="dir">The direction from which the anglesRange is taken into account</param>
-        /// <param name="anglesRange">The angle range, in degrees.</param>
-        /// <param name="radius"></param>
+        /// <param name="center">The center of the circle the arc lies on</param>
+        /// <param name="forwardDirection">The direction from which the midpoint of the arc starts</param>
+        /// <param name="normalDirection">The direction of view for the arc</param>
+        /// <param name="angle">The full angle of the arc in degrees</param>
+        /// <param name="radius">The distance from the center to start the arc</param>
         /// <param name="maxSteps">How many steps to use to draw the arc.</param>
-        public static void DrawWireArc(Vector3 position, Vector3 dir, float anglesRange, float radius, float maxSteps = 20)
+        public static void DrawWireArc(Vector3 center, Vector3 forwardDirection, Vector3 normalDirection, float angle, float radius, float maxSteps = 20)
         {
-            var srcAngles = getAnglesFromDir(position, dir);
-            var initialPos = position;
-            var posA = initialPos;
-            var stepAngles = anglesRange / maxSteps;
-            var angle = srcAngles - anglesRange / 2;
-            for (var i = 0; i <= maxSteps; i++)
-            {
-                var rad = Mathf.Deg2Rad * angle;
-                var posB = initialPos;
-                posB += new Vector3(radius * Mathf.Cos(rad), 0, radius * Mathf.Sin(rad));
+            Vector3 centerArc = (forwardDirection.normalized * radius) + center;
+            Vector3 startArc = (Quaternion.AngleAxis(angle * 0.5f, normalDirection) * (centerArc - center)).normalized * radius + center;
+            Gizmos.DrawLine(center, startArc);
 
-                Gizmos.DrawLine(posA, posB);
-
-                angle += stepAngles;
-                posA = posB;
+            float stepAngle = angle/(maxSteps);
+            Vector3 previousStepArc = startArc;
+            for(int i = 0; i < maxSteps + 1; i++) { //(angle * 0.5f) - 
+                Vector3 stepArc = (Quaternion.AngleAxis((stepAngle * -i), normalDirection.normalized) * (startArc - center)).normalized * radius + center;
+                Gizmos.DrawLine(previousStepArc, stepArc);
+                previousStepArc = stepArc;
             }
-            Gizmos.DrawLine(posA, initialPos);
-        }
-
-        private static float getAnglesFromDir(Vector3 position, Vector3 dir)
-        {
-            var forwardLimitPos = position + dir;
-            var srcAngles = Mathf.Rad2Deg * Mathf.Atan2(forwardLimitPos.z - position.z, forwardLimitPos.x - position.x);
-
-            return srcAngles;
+            Gizmos.DrawLine(previousStepArc, center);
         }
     }
 }

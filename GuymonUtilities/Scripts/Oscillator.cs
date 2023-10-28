@@ -24,7 +24,7 @@ namespace Guymon.Components {
         }
         private void Update() {
             if(time <= 0) {
-                Guymon.Utilities.Logger.Error("Oscillator: Time can not be less than or equal to 0");
+                Guymon.Utilities.Console.Error("Oscillator: Time can not be less than or equal to 0");
                 return;
             }
             elapsedTime -= Time.deltaTime;
