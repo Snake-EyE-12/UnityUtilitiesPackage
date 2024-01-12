@@ -182,7 +182,9 @@ namespace Guymon.Graphics
             foreach(IDGraphic id in graphics) {
                 if(id.name.Equals(graphicID)) return id.graphic;
             }
+            #if UNITY_EDITOR
             Guymon.Utilities.Console.Warning("GraphicHandler: Graphic (" + graphicID + ") could not be found");
+            #endif
             return null;
         }
         IEnumerator PlayGraphic(Graphic graphic, float duration, float fadeIn, float fadeOut) {

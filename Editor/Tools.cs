@@ -10,7 +10,7 @@ namespace Guymon.Utilities
         [MenuItem("Tools/Setup/Create Folders")]
         public static void CreateDefaultFolders() {
             Directory.CreateDirectory(Path.Combine(Application.dataPath, rootProject));
-            Dir(rootProject, "Resources", "Objects", "Scripts", "Sounds", "Sprites", "Scenes");
+            Dir(rootProject, "Resources", "Prefabs", "Scripts", "Sounds", "Textures", "Scenes", "Animations", "Externals");
             AssetDatabase.Refresh();
         }
         public static void Dir(string root, params string[] dir) {

@@ -18,8 +18,11 @@ namespace Guymon.DesignPatterns {
                 if (instance == null)
                 {
                     instance = GameObject.FindObjectOfType(typeof(T)) as T;
-                    if (instance == null)
+                    if (instance == null) {
+                        #if UNITY_EDITOR
                         Guymon.Utilities.Console.Error("Singleton<T>: Could not find GameObject of type " + typeof(T).Name + " in scene");
+                        #endif
+                    }
                 }
                 return instance;
         }

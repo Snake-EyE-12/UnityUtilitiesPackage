@@ -13,11 +13,11 @@ namespace Guymon.DesignPatterns {
         /// <summary>
         /// Executes Functionality
         /// </summary>
-        public abstract void execute();
+        public abstract void Execute();
         /// <summary>
         /// Reversive Implementation of Execute
         /// </summary>
-        public abstract void undo();
+        public abstract void Undo();
 
     }
 }

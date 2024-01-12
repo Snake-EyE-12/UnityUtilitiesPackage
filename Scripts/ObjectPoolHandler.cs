@@ -65,7 +65,9 @@ namespace Guymon.DesignPatterns {
         /// <param name="max">Maximum Object Count</param>
         public static void CreatePool(GameObject actor, string id, uint max) {
             if(pools.ContainsKey(id)) {
+                #if UNITY_EDITOR
                 Guymon.Utilities.Console.Error("ObjectPooler: Already Exists a Pool of Type " + id);
+                #endif
                 return;
             }
             pools.Add(id, new ObjectPool(actor, max));
@@ -101,7 +103,9 @@ namespace Guymon.DesignPatterns {
         /// <returns>Newly Active GameObject From the Pool Or Null</returns>
         public static GameObject CreateObject(string id) {
             if(!pools.ContainsKey(id)) {
+                #if UNITY_EDITOR
                 Guymon.Utilities.Console.Error("ObjectPooler: Could not find ObjectPool of Type " + id);
+                #endif
                 return null;
             }
             

@@ -26,7 +26,9 @@ namespace Guymon.DesignPatterns {
         /// </summary>
         public static void Undo() {
             if(index <= 0) {
+                #if UNITY_EDITOR
                 Guymon.Utilities.Console.Warning("CommandHandler: No command to undo");
+                #endif
                 return;
             }
             index--;
@@ -37,7 +39,9 @@ namespace Guymon.DesignPatterns {
         /// </summary>
         public static void Redo() {
             if(index == commands.Count) {
+                #if UNITY_EDITOR
                 Guymon.Utilities.Console.Warning("CommandHandler: No command to redo");
+                #endif
                 return;
             }
             commands[index].execute();
