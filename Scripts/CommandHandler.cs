@@ -18,7 +18,7 @@ namespace Guymon.DesignPatterns {
         public static void Execute(Command command) {
             if(commands.Count > index) commands.RemoveRange(index, commands.Count - 1);
             commands.Add(command);
-            command.execute();
+            command.Execute();
             index++;
         }
         /// <summary>
@@ -32,7 +32,7 @@ namespace Guymon.DesignPatterns {
                 return;
             }
             index--;
-            commands[index].undo();
+            commands[index].Undo();
         }
         /// <summary>
         /// Re-Executes a Previously Undone Command
@@ -44,7 +44,7 @@ namespace Guymon.DesignPatterns {
                 #endif
                 return;
             }
-            commands[index].execute();
+            commands[index].Execute();
             index++;
         }
     }
