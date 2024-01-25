@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using System.IO;
 using UnityEngine;
@@ -21,3 +22,4 @@ namespace Guymon.Utilities
         }
     }
 }
+#endif
