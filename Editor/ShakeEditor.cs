@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using Guymon.Components;
@@ -10,3 +11,4 @@ public class ShakeEditor : Editor {
         if(GUILayout.Button("Small Shake Test")) (target as Shake2D).Shake(0.25f);
     }
 }
+#endif
