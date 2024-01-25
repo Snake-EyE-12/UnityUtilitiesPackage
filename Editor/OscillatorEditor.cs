@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using Guymon.Components;
@@ -9,3 +10,4 @@ public class OscillatorEditor : Editor {
         if(GUILayout.Button("Reset Transform Position")) (target as Oscillator).transform.localPosition = (target as Oscillator).start;
     }
 }
+#endif
