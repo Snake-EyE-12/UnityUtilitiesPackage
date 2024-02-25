@@ -10,7 +10,7 @@ namespace Guymon.DesignPatterns {
     public abstract class Singleton<T> : MonoBehaviour
         where T : class
     {
-        private static T instance = null;
+        protected static T instance = null;
         /// <summary>
         /// Singleton instance
         /// </summary>
