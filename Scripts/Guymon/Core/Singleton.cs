@@ -31,5 +31,9 @@ namespace Guymon.DesignPatterns {
 		        return instance;
 	        }
         }
+	private void OnDestroy()
+        {
+	        instance = null;
+        }
     }
 }
