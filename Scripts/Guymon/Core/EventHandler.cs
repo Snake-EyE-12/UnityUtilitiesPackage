@@ -69,6 +69,14 @@ namespace Guymon.DesignPatterns {
             lateAddCalls.Clear();
             lateRemoveCalls.Clear();
         }
+        /// <summary>
+        /// Removes All Listeners
+        /// </summary>
+        public static void ClearListeners() {
+            allEvents.Clear();
+            lateRemoveCalls.Clear();
+            lateAddCalls.Clear();
+        }
 
         private static Dictionary<string, List<UnityAction<EventArgs>>> allEvents = new Dictionary<string, List<UnityAction<EventArgs>>>();
         
