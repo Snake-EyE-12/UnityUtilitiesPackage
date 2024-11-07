@@ -47,5 +47,12 @@ namespace Guymon.DesignPatterns {
             commands[index].Execute();
             index++;
         }
+        /// <summary>
+        /// Clears all Stored Commands
+        /// </summary>
+        public static void Clear() {
+            commands.Clear();
+            index = 0;
+        }
     }
 }
