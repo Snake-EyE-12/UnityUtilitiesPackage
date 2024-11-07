@@ -16,7 +16,7 @@ namespace Guymon.DesignPatterns {
         /// </summary>
         /// <param name="command">Command to be Executed</param>
         public static void Execute(Command command) {
-            if(commands.Count > index) commands.RemoveRange(index, commands.Count - 1);
+            if(commands.Count > index) commands.RemoveRange(index, commands.Count - 1 - index);
             commands.Add(command);
             command.Execute();
             index++;
