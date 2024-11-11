@@ -59,7 +59,7 @@ namespace Guymon.DesignPatterns {
         /// </summary>
         public static int Count()
         {
-            return index;
+            return index - 1;
         }
     }
 }
