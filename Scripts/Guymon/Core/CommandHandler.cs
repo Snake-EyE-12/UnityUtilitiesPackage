@@ -54,5 +54,12 @@ namespace Guymon.DesignPatterns {
             commands.Clear();
             index = 0;
         }
+        /// <summary>
+        /// Counts the number of Stored Commands
+        /// </summary>
+        public static int Count()
+        {
+            return index;
+        }
     }
 }
