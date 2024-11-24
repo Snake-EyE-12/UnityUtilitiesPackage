@@ -47,7 +47,7 @@ namespace Guymon.DesignPatterns {
         /// <param name="eventID">ID of Event</param>
         public static void Invoke(string eventID, EventArgs args) { //params object[] args
             if(!allEvents.ContainsKey(eventID)) return;
-            List<UnityAction<EventArgs>> events = allEvents[eventID];
+            List<UnityAction<EventArgs>> events = new List<UnityAction<EventArgs>>(allEvents[eventID]);
             for(int i = events.Count - 1; i >= 0; i--) {
                 if(events[i] == null) {
                     events[i].Invoke(args);
