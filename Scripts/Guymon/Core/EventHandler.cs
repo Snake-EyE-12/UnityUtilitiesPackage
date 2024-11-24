@@ -29,10 +29,7 @@ namespace Guymon.DesignPatterns {
                 allEvents[eventID].Add(action);
             }
         }
-        private static List<EventActionCall> lateAddCalls = new List<EventActionCall>();
-        public static void AddListenerLate(string eventID, UnityAction<EventArgs> action) {
-            lateAddCalls.Add(new EventActionCall(eventID, action));
-        }
+        
         /// <summary>
         /// Unsubscribe a Method to an Event ID
         /// </summary>
@@ -43,39 +40,22 @@ namespace Guymon.DesignPatterns {
                 allEvents[eventID].Remove(action);
             }
         }
-        private static List<EventActionCall> lateRemoveCalls = new List<EventActionCall>();
-        public static void RemoveListenerLate(string eventID, UnityAction<EventArgs> action) {
-            lateRemoveCalls.Add(new EventActionCall(eventID, action));
-        }
+        
         /// <summary>
         /// Invokes All Methods Attached to the Event ID
         /// </summary>
         /// <param name="eventID">ID of Event</param>
         public static void Invoke(string eventID, EventArgs args) { //params object[] args
             if(!allEvents.ContainsKey(eventID)) return;
-            foreach(UnityAction<EventArgs> unityAction in allEvents[eventID]) {
-                unityAction?.Invoke(args);
+            List<UnityAction<EventArgs>> events = allEvents[eventID];
+            for(int i = events.Count - 1; i >= 0; i--) {
+                if(events[i] == null) {
+                    events[i].Invoke(args);
+                }
             }
-
-            foreach (EventActionCall call in lateAddCalls)
-            {
-                AddListener(call.eventID, call.action);
-            }
-            foreach (EventActionCall call in lateRemoveCalls)
-            {
-                RemoveListener(call.eventID, call.action);
-            }
-
-            lateAddCalls.Clear();
-            lateRemoveCalls.Clear();
         }
-        /// <summary>
-        /// Removes All Listeners
-        /// </summary>
         public static void ClearListeners() {
             allEvents.Clear();
-            lateRemoveCalls.Clear();
-            lateAddCalls.Clear();
         }
 
         private static Dictionary<string, List<UnityAction<EventArgs>>> allEvents = new Dictionary<string, List<UnityAction<EventArgs>>>();
@@ -87,6 +67,3 @@ namespace Guymon.DesignPatterns {
         
     }
 }
-
-
-
